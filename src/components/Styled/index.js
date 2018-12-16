@@ -6,6 +6,7 @@ export { default as Flex } from './Flex';
 export { default as FormWrapper } from './FormWrapper';
 export { default as Group } from './Group';
 export { default as Label } from './Label';
+export { default as RangeField } from './RangeField';
 export { default as RoundButton } from './RoundButton';
 export { default as RoundedImage } from './RoundedImage';
 export { default as Row } from './Row';

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
-import { Content, Errors, Flex, FormWrapper, Label, Group, RoundedImage, Row, Title } from '../Styled';
+import { Content, Errors, Flex, FormWrapper, Label, Group, RoundedImage, Row, Title,RangeField } from '../Styled';
 import logo from '../../logo.svg';
 import LeftColumn from './LeftColumn';
 import RightColumn from './RightColumn';
@@ -54,6 +54,7 @@ class RegisterForm extends React.Component {
   render() {
     return (
       <Content>
+        <RangeField type="range" />
         <Flex height="100%">
           <LeftColumn>
             <RoundedImage src={logo} size="150px" />
