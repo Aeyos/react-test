@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export default styled.h1`
-  border-bottom: 2px solid ${props => props.theme.mainColor};
+  border-bottom: ${props => props.theme.borderSize} solid ${props => props.theme.mainColor};
   color: ${props => props.theme.mainColor};
   display: inline-block;
   font-weight: 100;

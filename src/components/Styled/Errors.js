@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export default styled.div`
-  color: red;
+  color: ${props => props.theme.mainColor};
+  font-weight: 100;
   width: 100%;
 `;

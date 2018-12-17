@@ -5,6 +5,7 @@ export { default as Errors } from './Errors';
 export { default as Flex } from './Flex';
 export { default as FormWrapper } from './FormWrapper';
 export { default as Group } from './Group';
+export { default as InputText } from './InputText';
 export { default as Label } from './Label';
 export { default as RangeInput } from './RangeField/RangeInput';
 export { default as RangeLabel } from './RangeField/RangeLabel';
