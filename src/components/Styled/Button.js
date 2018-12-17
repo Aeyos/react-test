@@ -5,7 +5,7 @@ export default styled.button`
   border-bottom-width: ${props => props.theme.borderSize};
   border-radius: ${props => props.theme.borderRadius};
 
-  color: ${props => props.theme.backgroundColor};
+  color: ${props => props.theme.color1};
   background-color: ${props => props.theme.mainColor};
 
   text-align: center;
@@ -14,17 +14,18 @@ export default styled.button`
   padding: ${props => props.size * 0.2}em ${props => props.size * 0.5}em;
 
   transition:
-    background-color ${props => props.theme.quickTransition},
-    color ${props => props.theme.quickTransition};
+    background-color ${props => props.theme.defaultTransition},
+    color ${props => props.theme.defaultTransition};
 
   &:hover {
     cursor: pointer;
-    background-color: ${props => props.theme.helperColor2};
+    background-color: transparent;
     color: ${props => props.theme.mainColor};
   }
 
   &:active {
-    background-color: white;
-    border-bottom-width: ${props => props.theme.borderSize};
+    color: white;
+    background-color: transparent;
+    border-bottom-width: 1px;
   }
 `;

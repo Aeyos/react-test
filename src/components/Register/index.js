@@ -4,7 +4,7 @@ import CenterButton from '../CenterButton';
 import RegisterForm from '../RegisterForm';
 
 class Register extends React.Component {
-  state = { step: 1 }
+  state = { step: 0 }
 
   _nextStep = () => {
     this.setState({ step: this.state.step + 1 });

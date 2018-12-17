@@ -8,7 +8,7 @@ export default styled.div`
   position: absolute;
   width: auto;
   white-space: nowrap;
-  padding-top: 5px;
+  padding-top: 2px;
 
   ${RangeLabel} {
     transform: translate(-50%, 0);

@@ -1,9 +1,17 @@
 export default {
-  backgroundColor: '#444444',
-  mainColor: '#67b9ff',
-  light: '#B3B3B3',
-  lighter: '#4C4C4C',
-  darker: '#3C3C3C',
+  mainColor: '#FFF',
+  // FIRE
+  // color1: '#cb2d3e',
+  // color2: '#ef473a',
+  // MAUVE
+  // color1: '#42275a',
+  // color2: '#734b6d',
+  // MANGO
+  color1: '#CB2D67',
+  color2: '#EF7B3A',
+  light: 'red',
+  lighter: 'red',
+  darker: 'red',
 
   borderSize: '3px',
   borderRadius: '5px',

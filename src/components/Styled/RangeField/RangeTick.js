@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export default styled.div`
-  background: ${props => props.active ? props.theme.mainColor : props.theme.lighter};
+  background: ${props => props.active ? props.theme.color1 : props.theme.mainColor};
   border-radius: 50%;
-  border: 3px solid ${props => props.theme.lighter};
+  border: 3px solid ${props => props.theme.mainColor};
   height: 12px;
   position: absolute;
   top: -21px;
@@ -13,7 +13,7 @@ export default styled.div`
 
   &:before {
     content: ' ';
-    background: ${props => props.theme.lighter};
+    background: ${props => props.theme.mainColor};
     border-radius: 2px;
     display: inline-block;
     height: 15px;

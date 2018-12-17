@@ -61,7 +61,7 @@ class RegisterForm extends React.Component {
               {...this.formik}
             >
               {({ isSubmitting }) => (
-                <FormWrapper labelColSize="200px">
+                <FormWrapper labelColSize="150px">
                   <Form>
                     {this.getFormFields()}
                     <div>

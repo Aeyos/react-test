@@ -5,8 +5,6 @@ import theme from './themes/default.js';
 import Register from './components/Register';
 import Page from './components/Page';
 
-import './App.css';
-
 class App extends Component {
   render() {
     return (
