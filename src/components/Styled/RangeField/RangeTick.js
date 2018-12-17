@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export default styled.div`
   background: ${props => props.active ? props.theme.color1 : props.theme.mainColor};
   border-radius: 50%;
-  border: 3px solid ${props => props.theme.mainColor};
+  border: 2px solid ${props => props.theme.mainColor};
   height: 12px;
   position: absolute;
   top: -21px;
@@ -17,9 +17,9 @@ export default styled.div`
     border-radius: 2px;
     display: inline-block;
     height: 15px;
-    left: 4px;
+    left: 5px;
     position: relative;
     top: 10px;
-    width: 4px;
+    width: 2px;
   }
 `;

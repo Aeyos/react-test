@@ -9,6 +9,9 @@ export default {
   // MANGO
   color1: '#CB2D67',
   color2: '#EF7B3A',
+  // DUSK
+  // color1: '#2C3E50',
+  // color2: '#FD746C',
   light: 'red',
   lighter: 'red',
   darker: 'red',

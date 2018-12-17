@@ -4,5 +4,6 @@ export default styled.label`
   color: ${props => props.theme.mainColor};
   display: inline-block;
   text-align: right;
-  padding-right: 2em;
+  padding-right: 1em;
+  font-weight: 100;
 `;
