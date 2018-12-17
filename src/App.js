@@ -5,7 +5,6 @@ import theme from './themes/default.js';
 import Register from './components/Register';
 import Page from './components/Page';
 
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {

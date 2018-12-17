@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
-import { Content, Errors, Flex, FormWrapper, Label, Group, RoundedImage, Row, Title,RangeField } from '../Styled';
+import { Content, Errors, Flex, FormWrapper, Label, Group, RoundedImage, Row, Title } from '../Styled';
 import logo from '../../logo.svg';
 import LeftColumn from './LeftColumn';
 import RightColumn from './RightColumn';
@@ -15,19 +15,16 @@ class RegisterForm extends React.Component {
 
     this.formik = {
       validate,
-      initialValues: {},
+      initialValues: { age: 0 },
       onSubmit: this._onSubmit
     }
   }
 
   getField(field, index) {
-    console.log('field', field)
-    if (typeof field.component === 'function') {
-      return field.component(field);
-    } else if (!field.name) {
+    if (!field.name) {
       return (<div key={index}></div>);
     }
-    return (<Field {...field}></Field>);
+    return (<Field key={field.name} {...field}></Field>);
   }
 
   getFormFields() {
@@ -54,7 +51,6 @@ class RegisterForm extends React.Component {
   render() {
     return (
       <Content>
-        <RangeField type="range" />
         <Flex height="100%">
           <LeftColumn>
             <RoundedImage src={logo} size="150px" />
