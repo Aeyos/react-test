@@ -1,5 +1,7 @@
 import React from 'react';
 
+import AgeRange from '../AgeRange';
+
 export default [{
   label: 'Nome',
   fields: [{
@@ -13,7 +15,7 @@ export default [{
   }],
 }, {
   label: 'Idade',
-  fields: [{ name: 'age', component: (field) => (<div key={field.name}>Age Range Field</div>) }],
+  fields: [{ name: 'age', component: AgeRange, labels: ['13-19', '19-29', '29-45', '45 ou acima'] }],
 }, {
   label: 'E-mail',
   fields: [{ name: 'email', placeholder: 'email@exemplo.com', type: 'email' }],
