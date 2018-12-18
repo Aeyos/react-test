@@ -20,6 +20,18 @@ export default styled.input`
     /* color: ${props => props.theme.color1}; */
     /* background-color: ${props => props.theme.mainColor}; */
     color: white;
-    background: rgba(255,255,255,0.1);
+    background: ${props => props.theme.inputBackground};
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active  {
+      -webkit-box-shadow: 0 0 0 30px white inset;
+  }
+
+  /*Change text in autofill textbox*/
+  input:-webkit-autofill {
+      -webkit-text-fill-color: inherit !important;
   }
 `;

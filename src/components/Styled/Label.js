@@ -6,5 +6,4 @@ export default styled.label`
   text-align: right;
   box-sizing: border-box;
   padding-right: 1em;
-  font-weight: 100;
 `;

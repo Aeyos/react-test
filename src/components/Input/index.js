@@ -5,3 +5,5 @@ import { InputText } from '../Styled';
 export default ({ field, form, ...def }) => (
   <InputText {...field} {...def} data-has-content={field.value && field.value.length > 0} />
 );
+
+export { default as PhoneInput } from './PhoneInput';
