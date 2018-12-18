@@ -9,6 +9,8 @@ The objective of this repo is to develop an UI component for profile creation wi
 * NPM
 * React
 * Styled-components
+* Font-awesome
+* Formik
 
 ## How to run the project
 
