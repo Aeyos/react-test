@@ -5,6 +5,8 @@ import theme from './themes/default.js';
 import Register from './components/Register';
 import Page from './components/Page';
 
+import './IconLib';
+
 class App extends Component {
   render() {
     return (
