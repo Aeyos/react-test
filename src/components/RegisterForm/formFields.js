@@ -2,6 +2,8 @@ import React from 'react';
 
 import AgeRange from '../AgeRange';
 import Input, { PhoneInput } from '../Input';
+import Select from '../Select';
+import { Countries } from '../../data';
 
 export default [{
   label: 'Nome',
@@ -27,7 +29,7 @@ export default [{
   fields: [{ name: 'phone', placeholder: '(41) 99999-999', type: 'phone', component: PhoneInput }],
 }, {
   label: 'País',
-  fields: [{ name: 'country', component: (field) => (<div key={field.name}>Select Country</div>) }],
+  fields: [{ name: 'country', placeholder: 'Procure o país', component: Select, data: Countries }],
 }, {
   label: 'Estado',
   fields: [{ name: 'state', component: (field) => (<div key={field.name}>Select State</div>) }],
