@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { isEqual } from 'lodash';
 
 import {
   RangeInput,
@@ -15,6 +16,16 @@ class AgeRange extends React.Component {
 
   static getDerivedStateFromProps(props) {
     return { max: props.labels.length - 1 }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // Only update on setState or form value has changed
+    if (this.props.field.value === nextProps.field.value ||
+      isEqual(this.state, nextState)
+    ) {
+      return false;
+    }
+    return true;
   }
 
   getLabels() {
