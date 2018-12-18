@@ -11,8 +11,4 @@ export default styled.input`
   width: calc(100% + 16px);
   -ms-appearance: none;
   -webkit-appearance: none;
-
-  &:focus {
-    outline: none;
-  }
 `;

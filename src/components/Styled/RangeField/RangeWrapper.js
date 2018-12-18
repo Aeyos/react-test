@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 
-import RangeInput from './RangeInput';
-
 export default styled.div`
-  margin: 0 8px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  /* margin: 0 8px; */
   height: 50px;
   position: relative;
+
+  &[data-has-focus="true"] {
+    background: ${props => props.theme.inputBackground};
+  }
 `;

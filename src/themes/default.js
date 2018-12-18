@@ -9,6 +9,7 @@ export default {
   // MANGO
   color1: '#b65d92',
   color2: '#6083be',
+  inputBackground: 'rgba(255, 255, 255, 0.2)',
   // DUSK
   // color1: '#2C3E50',
   // color2: '#FD746C',
@@ -18,9 +19,6 @@ export default {
   // Red sunset
   // color1: '#355C7D',
   // color2: '#C06C84',
-  light: 'red',
-  lighter: 'red',
-  darker: 'red',
 
   borderSize: '2px',
   borderRadius: '5px',

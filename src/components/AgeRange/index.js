@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 import {
   RangeInput,
@@ -12,16 +11,15 @@ import {
 } from '../Styled';
 
 class AgeRange extends React.Component {
-  state = { max: 1 }
+  state = { max: 1, focus: false }
 
   static getDerivedStateFromProps(props) {
-    console.log('props', props)
     return { max: props.labels.length - 1 }
   }
 
   getLabels() {
     return this.props.labels.map((label, index) => (
-      <RangeLabelWrapper left={this.getTickOffset(index)}>
+      <RangeLabelWrapper key={label} left={this.getTickOffset(index)}>
         <RangeTick active={this.props.field.value === index} />
         <RangeLabel>{label}</RangeLabel>
       </RangeLabelWrapper>
@@ -32,13 +30,20 @@ class AgeRange extends React.Component {
     return (100 / this.state.max) * index;
   }
 
+  _focus = (evt) => {
+    this.setState({ focus: true });
+  }
+
+  _blur = (evt) => {
+    this.setState({ focus: false });
+  }
+
   render() {
-    console.log('this.props', this.props);
     return (
-      <RangeWrapper>
+      <RangeWrapper data-has-focus={this.state.focus}>
         <RangeTrack />
         <div>{this.getLabels()}</div>
-        <RangeInput {...this.props.field} type="range" min="0" max={this.state.max} />
+        <RangeInput {...this.props.field} onFocus={this._focus} onBlur={this._blur} type="range" min="0" max={this.state.max} />
       </RangeWrapper>
     );
   }
