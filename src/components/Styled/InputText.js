@@ -8,6 +8,8 @@ export default styled.input`
   outline: none;
   padding: 5px;
   color: white;
+  width: 100%;
+  box-sizing: border-box;
 
   &::placeholder {
     color: white;
@@ -17,8 +19,6 @@ export default styled.input`
   &[data-has-content="true"],
   &:focus,
   &:active {
-    /* color: ${props => props.theme.color1}; */
-    /* background-color: ${props => props.theme.mainColor}; */
     color: white;
     background: ${props => props.theme.inputBackground};
   }

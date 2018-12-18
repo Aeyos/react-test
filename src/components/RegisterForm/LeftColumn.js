@@ -5,4 +5,5 @@ export default styled.div`
   border-right: ${props => props.theme.borderSize} solid white;
   padding: 48px;
   box-sizing: border-box;
+  width: 250px;
 `;
