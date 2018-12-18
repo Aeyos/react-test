@@ -8,5 +8,4 @@ export default styled.div`
   position: absolute;
   top: 32px;
   width: auto;
-  display: none;
 `;

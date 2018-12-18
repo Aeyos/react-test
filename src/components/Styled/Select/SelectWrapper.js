@@ -6,7 +6,7 @@ export default styled.div`
   position: relative;
   margin-right: -100px;
 
-  & input:focus + ${DropdownWrapper} {
-    display: block;
+  ${DropdownWrapper} {
+    display: ${props => props.focused ? 'block' : 'none'};
   }
 `;

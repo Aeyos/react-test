@@ -16,6 +16,7 @@ class Select extends React.Component {
       filtered: props.data.slice(0),
       active: -1,
       value: '',
+      focused: false,
     };
 
     window.addEventListener('scroll', this._scroll);
@@ -30,9 +31,6 @@ class Select extends React.Component {
   }
 
   recalculateMaxHeight() {
-    if (document.activeElement === this.inputEl.current) {
-      console.log('active same')
-    }
     const rect = this.baseEl.current.getBoundingClientRect();
     const diff = window.innerHeight - rect.top;
     const maxHeight = Math.min(600, Math.max(100, diff - 50));
@@ -86,7 +84,18 @@ class Select extends React.Component {
   }
 
   _scroll = (evt) => {
+    if (this.state.focused) {
+      this.recalculateMaxHeight();
+    }
+  }
+
+  _focus = (evt) => {
     this.recalculateMaxHeight();
+    this.setState({ focused: true });
+  }
+
+  _blur = (evt) => {
+    this.setState({ focused: false });
   }
 
   // @TODO: remove countries and use data prop
@@ -101,12 +110,11 @@ class Select extends React.Component {
   render() {
     console.log('render')
     return (
-      <SelectWrapper ref={this.baseEl}>
-        <InputText ref={this.inputEl} onKeyDown={this._keyDown} onChange={this._change} placeholder={this.props.placeholder} value={this.state.value} />
+      <SelectWrapper ref={this.baseEl} focused={this.state.focused}>
+        <InputText ref={this.inputEl} onKeyDown={this._keyDown} onChange={this._change} onFocus={this._focus} onBlur={this._blur} placeholder={this.props.placeholder} value={this.state.value} />
         <DropdownWrapper maxHeight={this.state.maxHeight}>
           {this.renderItems()}
         </DropdownWrapper>
-        ---{this.props.field.value && this.props.field.value.label}---
       </SelectWrapper>
     );
   }
