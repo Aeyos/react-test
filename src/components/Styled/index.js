@@ -1,9 +1,9 @@
 export { default as Button } from './Button';
 export { default as CenterContent } from './CenterContent';
 export { default as Content } from './Content';
-export { default as Errors } from './Errors';
 export { default as Flex } from './Flex';
 export { default as FormWrapper } from './FormWrapper';
+export { default as FeedbackCard } from './Feedback/FeedbackCard';
 export { default as Group } from './Group';
 export { default as InputText } from './InputText';
 export { default as Label } from './Label';

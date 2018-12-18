@@ -1,12 +1,12 @@
-const nameRegex = /^([A-Za-z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff\s]*)$/;
-//                 |  A-z   Latin characters                       Space |
+import { nameValidate, emailValidate, phoneValidate } from '../../utils/validation';
 
 export default (values) => {
   const errors = {};
 
-  errors.name = values.name.match(nameRegex) ? false : 'Nome em branco';
-  errors.name = values.name.match(nameRegex) ? false : 'Nome em branco';
-  errors.surname = 'sobre o nome em branco';
+  errors.name = nameValidate('Nome' ,values.name);
+  errors.surname = nameValidate('Sobrenome' ,values.surname);
+  errors.email = emailValidate('E-mail', values.email);
+  errors.phone = phoneValidate('Telefone', values.phone);
 
   return errors;
 };

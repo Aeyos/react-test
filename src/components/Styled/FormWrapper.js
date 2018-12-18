@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-import Errors from './Errors';
-import Group from './Group';
+import FeedbackCard from './Feedback/FeedbackCard';
 import Label from './Label';
 
 export default styled.div`
@@ -9,7 +8,7 @@ export default styled.div`
     width: ${props => props.labelColSize || 'auto'};
   }
 
-  & ${Errors} {
+  & ${FeedbackCard} {
     margin-left: ${props => props.labelColSize || '0'};
   }
 

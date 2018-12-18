@@ -1,13 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
-import { Content, Errors, Flex, FormWrapper, Label, Group, RoundedImage, Row, Title } from '../Styled';
+import { Content, Flex, FormWrapper, Label, Group, RoundedImage, Row, Title } from '../Styled';
+import Feedback from '../Feedback';
 import logo from '../../logo.svg';
+
 import LeftColumn from './LeftColumn';
 import RightColumn from './RightColumn';
 import validate from './formValidate';
 import form from './formFields';
+import initialValues from './formInitialValues';
 
 class RegisterForm extends React.Component {
   constructor() {
@@ -15,9 +17,15 @@ class RegisterForm extends React.Component {
 
     this.formik = {
       validate,
-      initialValues: { age: 0 },
+      initialValues: { ...this.getInitialValues(), ...initialValues },
       onSubmit: this._onSubmit
     }
+  }
+
+  getInitialValues() {
+    return form
+      .reduce((a, v) => [...a, ...(v.fields.map(e => e.name))], [])
+      .reduce((a, v) => ({ ...a, [v]: '' }), {});
   }
 
   getField(field, index) {
@@ -27,18 +35,18 @@ class RegisterForm extends React.Component {
     return (<Field key={field.name} {...field}></Field>);
   }
 
-  getFormFields() {
+  getFormFields(errors, touched) {
     return form.map(entry => (
       <Row key={entry.label} data-label={entry.label}>
         <Label>{entry.label}</Label>
         <Group count={entry.fields.length}>
           {entry.fields.map(this.getField)}
         </Group>
-        <Errors>
-          {entry.fields.filter(f => f.name).map(field => (
-            <ErrorMessage key={field.name} name={field.name} component="div" />
-          ))}
-        </Errors>
+        {entry.fields.filter(f => f.name).map(field => (
+          <Feedback key={field.name} show={errors[field.name] && touched[field.name]} type="Error">
+            <ErrorMessage name={field.name} component="div" />
+          </Feedback>
+        ))}
       </Row>
     ));
   }
@@ -60,10 +68,10 @@ class RegisterForm extends React.Component {
             <Formik
               {...this.formik}
             >
-              {({ isSubmitting }) => (
+              {({ isSubmitting, errors, touched }) => (
                 <FormWrapper labelColSize="150px">
                   <Form>
-                    {this.getFormFields()}
+                    {this.getFormFields(errors, touched)}
                     <div>
                       <button type="submit" disabled={isSubmitting}>
                         Submit
