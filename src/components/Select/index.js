@@ -1,11 +1,8 @@
 import React from 'react';
 
 import { InputText } from '../Styled';
-import { Countries } from '../../data';
 import { SelectWrapper, DropdownItem, DropdownWrapper } from '../Styled';
 
-// Pure Components only update when the values on state actually changed
-// and not just when setState is called
 class Select extends React.Component {
   constructor(props) {
     super(props);
@@ -98,7 +95,6 @@ class Select extends React.Component {
     this.setState({ focused: false });
   }
 
-  // @TODO: remove countries and use data prop
   renderItems() {
     return this.state.filtered.map((c, i) => (
       <DropdownItem key={c.label} active={this.state.active === i}>
