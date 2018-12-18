@@ -19,6 +19,11 @@ npm i
 npm start
 `
 
+## Notes
+
+* The form could be componetized to wrap the boilerplate better and be less verbose.
+* The Styled components could be better organized
+
 ## Credits
 
 Developed by Vinícius Marcelo Negrão (aeyos).
