@@ -1,9 +1,10 @@
 import React from 'react';
+import { isEqual } from 'lodash';
 
 import { InputText } from '../Styled';
 import { SelectWrapper, DropdownItem, DropdownWrapper } from '../Styled';
 
-class Select extends React.Component {
+class Select extends React.PureComponent {
   constructor(props) {
     super(props);
     this.baseEl = React.createRef();
@@ -19,6 +20,18 @@ class Select extends React.Component {
     window.addEventListener('scroll', this._scroll);
   }
 
+  /* LIFECYCLE FUNCTIONS */
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // Only update on setState or form value has changed
+    if (this.props.field.value === nextProps.field.value ||
+      isEqual(this.state, nextState)
+    ) {
+      return false;
+    }
+    return true;
+  }
+
   componentDidMount() {
     this.recalculateMaxHeight();
   }
@@ -26,6 +39,8 @@ class Select extends React.Component {
   componentWillUnmount() {
     window.removeEventListener('scroll', this._scroll)
   }
+
+  /* GENERAL */
 
   recalculateMaxHeight() {
     const rect = this.baseEl.current.getBoundingClientRect();
@@ -63,6 +78,21 @@ class Select extends React.Component {
     });
   }
 
+  /* EVENT FUNCTIONS */
+
+  _change = (evt) => {
+    this.filter(evt.target.value);
+  }
+
+  _blur = (evt) => {
+    this.setState({ focused: false });
+  }
+
+  _focus = (evt) => {
+    this.recalculateMaxHeight();
+    this.setState({ focused: true });
+  }
+
   _keyDown = (evt) => {
     if (evt.key === 'ArrowUp') {
       evt.preventDefault();
@@ -76,24 +106,13 @@ class Select extends React.Component {
     }
   }
 
-  _change = (evt) => {
-    this.filter(evt.target.value);
-  }
-
   _scroll = (evt) => {
     if (this.state.focused) {
       this.recalculateMaxHeight();
     }
   }
 
-  _focus = (evt) => {
-    this.recalculateMaxHeight();
-    this.setState({ focused: true });
-  }
-
-  _blur = (evt) => {
-    this.setState({ focused: false });
-  }
+  /* RENDER FUNCTIONS */
 
   renderItems() {
     return this.state.filtered.map((c, i) => (
