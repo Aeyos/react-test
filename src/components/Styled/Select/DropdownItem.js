@@ -1,8 +1,16 @@
 import styled from 'styled-components';
 
 export default styled.div`
-  padding: 5px;
+  background: ${props => props.theme.mainColor};
+  color: ${props => props.theme.color1};
+  cursor: pointer;
   font-size: 1em;
-  background: ${props => props.active ? props.theme.color1 : props.theme.mainColor};
-  color: ${props => props.active ? props.theme.mainColor : props.theme.color1};
+  min-width: 200px;
+  padding: 5px;
+
+  &[data-active="true"],
+  &:hover {
+    background: ${props => props.theme.color1};
+    color: ${props => props.theme.mainColor};
+  }
 `;

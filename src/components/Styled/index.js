@@ -2,6 +2,7 @@
 export { default as FeedbackCard } from './Feedback/FeedbackCard';
 /* SELECT */
 export { default as DropdownItem } from './Select/DropdownItem';
+export { default as DropdownContent } from './Select/DropdownContent';
 export { default as DropdownWrapper } from './Select/DropdownWrapper';
 export { default as SelectWrapper } from './Select/SelectWrapper';
 /* RANGE */

@@ -1,20 +1,28 @@
 import React from 'react';
 import { isEqual } from 'lodash';
 
-import { InputText } from '../Styled';
-import { SelectWrapper, DropdownItem, DropdownWrapper } from '../Styled';
+import {
+  DropdownContent,
+  DropdownItem,
+  DropdownWrapper,
+  InputText,
+  SelectWrapper,
+} from '../Styled';
+import { onlyLetters } from '../../utils';
 
-class Select extends React.PureComponent {
+class Select extends React.Component {
   constructor(props) {
     super(props);
     this.baseEl = React.createRef();
     this.inputEl = React.createRef();
+    this.wrapperEl = React.createRef();
     this.state = {
       maxHeight: 50,
       filtered: props.data.slice(0),
       active: -1,
       value: '',
       focused: false,
+      mouseIn: false,
     };
 
     window.addEventListener('scroll', this._scroll);
@@ -24,7 +32,7 @@ class Select extends React.PureComponent {
 
   shouldComponentUpdate(nextProps, nextState) {
     // Only update on setState or form value has changed
-    if (this.props.field.value === nextProps.field.value ||
+    if (this.props.field.value === nextProps.field.value &&
       isEqual(this.state, nextState)
     ) {
       return false;
@@ -34,6 +42,12 @@ class Select extends React.PureComponent {
 
   componentDidMount() {
     this.recalculateMaxHeight();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!this.state.focused && !this.state.mouseIn && this.props.value !== this.props.field.value) {
+      this.setState({ value: this.props.field.value.label });
+    }
   }
 
   componentWillUnmount() {
@@ -60,17 +74,21 @@ class Select extends React.PureComponent {
     this.setState({ active: Math.min(this.state.filtered.length - 1, this.state.active + 1) });
   }
 
-  select() {
-    if (this.state.active !== -1) {
-      const obj = this.state.filtered[this.state.active];
+  select(index) {
+    this.wrapperEl.current.scrollTop = 0;
+
+    if (index !== -1) {
+      const obj = this.state.filtered[index];
+
       this.props.form.setFieldValue(this.props.field.name, obj);
       this.inputEl.current.blur();
-      this.setState({ value: obj.label });
+      this.setState({ focused: false, mouseIn: false, value: obj.label });
     }
   }
 
   filter(value) {
-    const filtered = this.props.data.filter(e => e.label.match(new RegExp(`${value}`, 'gi')));
+    const valueLetters = onlyLetters(value);
+    const filtered = this.props.data.filter(e => e.label.match(new RegExp(`${valueLetters}`, 'gi')));
     this.setState({
       value,
       active: -1,
@@ -90,7 +108,7 @@ class Select extends React.PureComponent {
 
   _focus = (evt) => {
     this.recalculateMaxHeight();
-    this.setState({ focused: true });
+    this.setState({ focused: true, mouseIn: true });
   }
 
   _keyDown = (evt) => {
@@ -102,7 +120,9 @@ class Select extends React.PureComponent {
       this.selectDown();
     } else if (evt.key === 'Enter') {
       evt.preventDefault();
-      this.select();
+      this.select(this.state.active);
+    } else if (evt.key === 'Tab') {
+      this.setState({ mouseIn: false, focused: false });
     }
   }
 
@@ -112,23 +132,49 @@ class Select extends React.PureComponent {
     }
   }
 
+  _mouseEnter = (evt) => {
+    if (this.state.focused) {
+      this.setState({ mouseIn: true });
+    }
+  }
+
+  _mouseLeave = (evt) => {
+    this.setState({ mouseIn: false });
+  }
+
   /* RENDER FUNCTIONS */
 
   renderItems() {
     return this.state.filtered.map((c, i) => (
-      <DropdownItem key={c.label} active={this.state.active === i}>
+      <DropdownItem key={c.label} data-active={this.state.active === i} onClick={() => this.select(i)}>
         {c.label}
       </DropdownItem>
     ))
   }
 
   render() {
-    console.log('render')
     return (
-      <SelectWrapper ref={this.baseEl} focused={this.state.focused}>
-        <InputText ref={this.inputEl} onKeyDown={this._keyDown} onChange={this._change} onFocus={this._focus} onBlur={this._blur} placeholder={this.props.placeholder} value={this.state.value} />
-        <DropdownWrapper maxHeight={this.state.maxHeight}>
-          {this.renderItems()}
+      <SelectWrapper
+        ref={this.baseEl}
+        focused={this.state.focused || this.state.mouseIn}
+        onMouseEnter={this._mouseEnter}
+        onMouseLeave={this._mouseLeave}
+      >
+        <InputText
+          ref={this.inputEl}
+          autoComplete={`${Math.random()}-autocomplete-disable`}
+          onBlur={this._blur}
+          onChange={this._change}
+          onFocus={this._focus}
+          onKeyDown={this._keyDown}
+          placeholder={this.props.placeholder}
+          value={this.state.value}
+          data-has-content={Boolean(this.props.field.value)}
+        />
+        <DropdownWrapper ref={this.wrapperEl} maxHeight={this.state.maxHeight}>
+          <DropdownContent>
+            {this.renderItems()}
+          </DropdownContent>
         </DropdownWrapper>
       </SelectWrapper>
     );

@@ -4,8 +4,10 @@ export default styled.div`
   display: inline-block;
   left: 0;
   max-height: ${props => props.maxHeight}px;
-  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
   position: absolute;
-  top: 32px;
+  top: 30px;
   width: auto;
+  z-index: 999;
 `;
