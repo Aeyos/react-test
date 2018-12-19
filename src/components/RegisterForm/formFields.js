@@ -4,6 +4,7 @@ import AgeRange from '../AgeRange';
 import Input, { PhoneInput } from '../Input';
 import Select from '../Select';
 import { Countries, States } from '../../data';
+import Interests from '../Interests';
 
 export default [{
   label: 'Nome',
@@ -38,10 +39,10 @@ export default [{
   fields: [{ name: 'address_type', placeholder: 'Selecione o tipo', component: Select, data: [{ label: 'Empresa' }, { label: 'Casa'}] }],
 }, {
   label: 'Endereço',
-  fields: [{ name: 'address', placeholder: 'R. Exemplo, 123, Complemento A', component: Input }],
+  fields: [{ name: 'address', placeholder: 'R. Exemplo, 123, Complemento A', component: Input, dependsOn: 'address_type' }],
 }, {
   label: 'Interesse',
-  fields: [{ name: 'interests', component: (field) => (<div key={field.name}>Interests Field</div>) }],
+  fields: [{ name: 'interests', placeholder: 'Adicione os interesses', component: Interests }],
 }, {
   label: '',
   fields: [{ name: 'receive_messages', component: (field) => (<div key={field.name}>Checkbox</div>) }],

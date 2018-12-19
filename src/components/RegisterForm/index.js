@@ -28,19 +28,22 @@ class RegisterForm extends React.Component {
       .reduce((a, v) => ({ ...a, [v]: '' }), {});
   }
 
-  getField(field, index) {
+  getField(field, index, values) {
+    let disabled = false;
     if (!field.name) {
       return (<div key={index}></div>);
+    } else if (field.dependsOn && !values[field.dependsOn]) {
+      disabled = true;
     }
-    return (<Field key={field.name} {...field}></Field>);
+    return (<Field key={field.name} disabled={disabled} {...field}></Field>);
   }
 
-  getFormFields(errors, touched) {
+  getFormFields(errors, touched, values) {
     return form.map(entry => (
       <Row key={entry.label} data-label={entry.label}>
         <Label>{entry.label}</Label>
         <Group count={entry.fields.length}>
-          {entry.fields.map(this.getField)}
+          {entry.fields.map((e, i) => this.getField(e, i, values))}
         </Group>
         {entry.fields.filter(f => f.name).map(field => (
           <Feedback key={field.name} show={errors[field.name] && touched[field.name]} type="Error">
@@ -69,10 +72,10 @@ class RegisterForm extends React.Component {
             <Formik
               {...this.formik}
             >
-              {({ isSubmitting, errors, touched }) => (
+              {({ values, isSubmitting, errors, touched }) => (
                 <FormWrapper labelColSize="150px">
                   <Form>
-                    {this.getFormFields(errors, touched)}
+                    {this.getFormFields(errors, touched, values)}
                     <div>
                       <button type="submit" disabled={isSubmitting}>
                         Submit
