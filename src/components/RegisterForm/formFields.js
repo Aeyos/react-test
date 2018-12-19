@@ -3,7 +3,7 @@ import React from 'react';
 import AgeRange from '../AgeRange';
 import Input, { PhoneInput } from '../Input';
 import Select from '../Select';
-import { Countries } from '../../data';
+import { Countries, States } from '../../data';
 
 export default [{
   label: 'Nome',
@@ -32,14 +32,13 @@ export default [{
   fields: [{ name: 'country', placeholder: 'Procure o país', component: Select, data: Countries }],
 }, {
   label: 'Estado',
-  fields: [{ name: 'state', component: (field) => (<div key={field.name}>Select State</div>) }],
+  fields: [{ name: 'state', placeholder: 'Procure o estado', component: Select, data: States }],
 }, {
   label: 'Tipo de Endereço',
-  fields: [{ name: 'address_type', component: (field) => (<div key={field.name}>Select Address</div>) }],
+  fields: [{ name: 'address_type', placeholder: 'Selecione o tipo', component: Select, data: [{ label: 'Empresa' }, { label: 'Casa'}] }],
 }, {
   label: 'Endereço',
-  fields: [{ name: 'address', component: (field) => (<div key={field.name}>Select Address</div>) }],
-  disabled: (val) => Boolean(val),
+  fields: [{ name: 'address', placeholder: 'R. Exemplo, 123, Complemento A', component: Input }],
 }, {
   label: 'Interesse',
   fields: [{ name: 'interests', component: (field) => (<div key={field.name}>Interests Field</div>) }],

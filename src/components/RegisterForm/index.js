@@ -62,6 +62,7 @@ class RegisterForm extends React.Component {
         <Flex height="100%">
           <LeftColumn>
             <RoundedImage src={logo} size="150px" />
+            <span style={{color:'yellow'}}>UPLOAD DE IMAGEM</span>
           </LeftColumn>
           <RightColumn>
             <Title>Cadastro de perfil</Title>
