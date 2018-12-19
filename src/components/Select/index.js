@@ -22,7 +22,7 @@ class Select extends React.Component {
       maxHeight: 50,
       filtered: props.data.slice(0),
       active: -1,
-      value: '',
+      value: props.field.value ? props.field.value.label : '',
       focused: false,
       mouseIn: false,
     };

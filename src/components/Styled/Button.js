@@ -13,6 +13,10 @@ export default styled.button`
   font-size: ${props => props.size}em;
   padding: ${props => props.size * 0.2}em ${props => props.size * 0.5}em;
 
+  font-size: 1em;
+  font-weight: 400;
+  padding: 5px 10px;
+
   transition:
     background-color ${props => props.theme.defaultTransition},
     color ${props => props.theme.defaultTransition};

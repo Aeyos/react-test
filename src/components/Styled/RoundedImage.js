@@ -6,6 +6,7 @@ export default styled.div`
   background-size: cover;
   background-position: center center;
   border-radius: 50%;
+  border: ${props => props.theme.border};
   height: ${props => props.size};
   width: ${props => props.size};
 `;

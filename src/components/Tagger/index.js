@@ -9,9 +9,13 @@ import TagsList from './TagsList';
 import TagItem from './TagItem';
 
 class Tagger extends React.Component {
-  state = {
-    tags: [],
-    value: '',
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      tags: props.field.value || [],
+      value: '',
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {

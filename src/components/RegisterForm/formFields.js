@@ -1,5 +1,3 @@
-import React from 'react';
-
 import AgeRange from '../AgeRange';
 import Input, { PhoneInput } from '../Input';
 import Select from '../Select';

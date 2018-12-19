@@ -1,25 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
-import { Content, Flex, FormWrapper, Label, Group, RoundedImage, Row, Title } from '../Styled';
+import { Content, Flex, FormWrapper, Label, Group, Row, Title } from '../Styled';
 import Feedback from '../Feedback';
-import logo from '../../logo.svg';
 
 import LeftColumn from './LeftColumn';
 import RightColumn from './RightColumn';
+import ImageUpload from '../ImageUpload';
 import SendButton from './SendButton';
 import validate from './formValidate';
 import form from './formFields';
 import initialValues from './formInitialValues';
 
 class RegisterForm extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.formik = {
       validate,
-      initialValues: { ...this.getInitialValues(), ...initialValues },
-      onSubmit: this._onSubmit
+      initialValues: { ...this.getInitialValues(), ...initialValues, ...props.previousData },
+      onSubmit: props.onSubmit
     }
   }
 
@@ -55,40 +56,37 @@ class RegisterForm extends React.Component {
     ));
   }
 
-  _onSubmit = (values, meta) => {
-    console.log('values', values);
-    console.log('meta', meta);
-  }
-
   render() {
     return (
       <Content>
-        <Flex height="100%">
-          <LeftColumn>
-            <RoundedImage src={logo} size="150px" />
-            <span style={{color:'yellow'}}>UPLOAD DE IMAGEM</span>
-          </LeftColumn>
-          <RightColumn>
-            <Title>Cadastro de perfil</Title>
-            <Formik
-              {...this.formik}
-            >
-              {({ values, isSubmitting, errors, touched }) => (
+        <Formik
+          {...this.formik}
+        >
+          {({ values, errors, touched, isSubmitting }) => (
+            <Flex height="100%">
+              <LeftColumn>
+                <Field component={ImageUpload} name="profile_picture" />
+              </LeftColumn>
+              <RightColumn>
+                <Title>Cadastro de perfil</Title>
                 <FormWrapper labelColSize="150px">
-                  {console.log('errors', errors)}
-                  {console.log('touched', touched)}
                   <Form>
                     {this.getFormFields(errors, touched, values)}
-                    <SendButton offset="150px">Enviar</SendButton>
+                    <SendButton type="submit" offset="150px">Confirmar</SendButton>
                   </Form>
                 </FormWrapper>
-              )}
-            </Formik>
-          </RightColumn>
-        </Flex>
+              </RightColumn>
+            </Flex>
+          )}
+        </Formik>
       </Content>
     );
   }
 }
+
+RegisterForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  previousData: PropTypes.object,
+};
 
 export default RegisterForm;

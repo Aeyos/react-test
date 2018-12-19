@@ -1,13 +1,16 @@
 import React from 'react';
 
-import { CenterContent, Button } from '../Styled';
+import { CenterContent, RoundButton } from '../Styled';
+import { PageSize } from '../Styled';
 
 const CenterButton = (props) => (
-  <CenterContent x y>
-    <Button size={1.5} {...props}>
-      {props.children}
-    </Button>
-  </CenterContent>
+  <PageSize>
+    <CenterContent x="true" y="true">
+      <RoundButton size="120px" {...props}>
+        {props.children}
+      </RoundButton>
+    </CenterContent>
+  </PageSize>
 );
 
 export default CenterButton;
