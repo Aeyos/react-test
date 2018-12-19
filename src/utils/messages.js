@@ -1,4 +1,4 @@
-import { capitalize } from './general';
+import { capitalize } from './index';
 
 export const empty = (name) => `${capitalize(name)} não pode ser vazio.`;
 export const letters = (name) => `${capitalize(name)} só pode conter letras.`;
