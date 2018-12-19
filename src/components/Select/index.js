@@ -117,6 +117,7 @@ class Select extends React.Component {
 
   _blur = (evt) => {
     this.setState({ focused: false });
+    this.props.form.setFieldTouched(this.props.field.name);
   }
 
   _focus = (evt) => {

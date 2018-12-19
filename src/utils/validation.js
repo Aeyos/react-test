@@ -21,3 +21,9 @@ export const phoneValidate = (fieldName, value) => {
   }
   return null;
 }
+export const emptyValidate = (fieldName, value) => {
+  if (!value) {
+    return empty(fieldName);
+  }
+  return null;
+}

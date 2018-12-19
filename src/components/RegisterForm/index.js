@@ -7,6 +7,7 @@ import logo from '../../logo.svg';
 
 import LeftColumn from './LeftColumn';
 import RightColumn from './RightColumn';
+import SendButton from './SendButton';
 import validate from './formValidate';
 import form from './formFields';
 import initialValues from './formInitialValues';
@@ -74,13 +75,11 @@ class RegisterForm extends React.Component {
             >
               {({ values, isSubmitting, errors, touched }) => (
                 <FormWrapper labelColSize="150px">
+                  {console.log('errors', errors)}
+                  {console.log('touched', touched)}
                   <Form>
                     {this.getFormFields(errors, touched, values)}
-                    <div>
-                      <button type="submit" disabled={isSubmitting}>
-                        Submit
-                      </button>
-                    </div>
+                    <SendButton offset="150px">Enviar</SendButton>
                   </Form>
                 </FormWrapper>
               )}
