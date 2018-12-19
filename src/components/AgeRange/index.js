@@ -20,7 +20,7 @@ class AgeRange extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     // Only update on setState or form value has changed
-    if (this.props.field.value === nextProps.field.value ||
+    if (this.props.field.value === nextProps.field.value &&
       isEqual(this.state, nextState)
     ) {
       return false;
