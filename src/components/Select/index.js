@@ -46,8 +46,8 @@ class Select extends React.Component {
     this.recalculateMaxHeight();
   }
 
-  componentDidUpdate(prevProps) {
-    if (!this.state.focused && !this.state.mouseIn && prevProps.field.value !== this.props.field.value) {
+  componentDidUpdate() {
+    if (!this.state.focused && !this.state.mouseIn && this.state.value !== this.props.field.value.label) {
       this.setState({ value: this.props.field.value.label });
     }
   }
