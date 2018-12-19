@@ -1,4 +1,4 @@
-export default {
+const theme = {
   mainColor: '#FFF',
   // FIRE
   // color1: '#cb2d3e',
@@ -26,3 +26,7 @@ export default {
   quickTransition: '0.1s ease',
   defaultTransition: '0.25s ease',
 };
+
+theme.border = `${theme.borderSize} solid ${theme.mainColor}`;
+
+export default theme;

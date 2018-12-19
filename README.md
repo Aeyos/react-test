@@ -23,6 +23,7 @@ npm start
 
 * The form could be componetized to wrap the boilerplate better and be less verbose.
 * The Styled components could be better organized
+* States will always be brazilian states despite country selection
 
 ## Credits
 
