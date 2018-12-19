@@ -5,6 +5,7 @@ import {
   DropdownContent,
   DropdownItem,
   DropdownWrapper,
+  HideElement,
   InputText,
   SelectWrapper,
 } from '../Styled';
@@ -16,6 +17,7 @@ class Select extends React.Component {
     this.baseEl = React.createRef();
     this.inputEl = React.createRef();
     this.wrapperEl = React.createRef();
+    this.itemEl = React.createRef();
     this.state = {
       maxHeight: 50,
       filtered: props.data.slice(0),
@@ -45,7 +47,7 @@ class Select extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (!this.state.focused && !this.state.mouseIn && this.props.value !== this.props.field.value) {
+    if (!this.state.focused && !this.state.mouseIn && prevProps.field.value !== this.props.field.value) {
       this.setState({ value: this.props.field.value.label });
     }
   }
@@ -67,11 +69,22 @@ class Select extends React.Component {
   }
 
   selectUp() {
+    this.updateScroll();
     this.setState({ active: Math.max(-1, this.state.active - 1) });
   }
 
   selectDown() {
+    this.updateScroll();
     this.setState({ active: Math.min(this.state.filtered.length - 1, this.state.active + 1) });
+  }
+
+  updateScroll() {
+    const itemHeight = this.itemEl.current.offsetHeight;
+    this.wrapperEl.current.scrollTop = (
+      ((this.state.active + 1) * itemHeight)
+      -
+      (this.wrapperEl.current.offsetHeight / 2)
+    );
   }
 
   select(index) {
@@ -176,6 +189,9 @@ class Select extends React.Component {
             {this.renderItems()}
           </DropdownContent>
         </DropdownWrapper>
+        <HideElement>
+          <DropdownItem ref={this.itemEl} style={{ position: 'absolute', opacity: 0 }}>&nbsp;</DropdownItem>
+        </HideElement>
       </SelectWrapper>
     );
   }
