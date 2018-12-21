@@ -25,6 +25,7 @@ class Select extends React.Component {
       value: props.field.value ? props.field.value.label : '',
       focused: false,
       mouseIn: false,
+      touched: false,
     };
 
     window.addEventListener('scroll', this._scroll);
@@ -109,6 +110,10 @@ class Select extends React.Component {
     });
   }
 
+  totalBlur() {
+    this.props.form.setFieldTouched(this.props.field.name);
+  }
+
   /* EVENT FUNCTIONS */
 
   _change = (evt) => {
@@ -117,12 +122,14 @@ class Select extends React.Component {
 
   _blur = (evt) => {
     this.setState({ focused: false });
-    this.props.form.setFieldTouched(this.props.field.name);
+    if (this.state.mouseIn === false) {
+      this.totalBlur();
+    }
   }
 
   _focus = (evt) => {
     this.recalculateMaxHeight();
-    this.setState({ focused: true, mouseIn: true });
+    this.setState({ focused: true, mouseIn: true, touched: true });
   }
 
   _keyDown = (evt) => {
@@ -154,6 +161,9 @@ class Select extends React.Component {
 
   _mouseLeave = (evt) => {
     this.setState({ mouseIn: false });
+    if (this.state.focused === false && this.state.touched) {
+      this.totalBlur();
+    }
   }
 
   /* RENDER FUNCTIONS */
